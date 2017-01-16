@@ -19,6 +19,7 @@ var app={
 		}).addTo(miMapa);
 
 		app.pintaMarcador([position.coords.latitude, position.coords.longitude], '¡Estoy aquí!', miMapa);
+		app.pintaCirculo([position.coords.latitude, position.coords.longitude,miMapa]);
 
 		miMapa.on('click', function(evento){
 			var texto = 'Marcador en l(' + evento.latlng.lat.toFixed(2) + ') y L(' + evento.latlng.lng.toFixed(2) + ')';
@@ -29,6 +30,15 @@ var app={
 	pintaMarcador: function(latlng, texto,mapa){
 		var marcador = L.marker(latlng).addTo(mapa);
 		marcador.bindPopup(texto).openPopup();
+	},
+
+	pintaCirculo: function(latlng,mapa){
+		var circle = L.circle(latlng, {
+		    color: 'red',
+		    fillColor: '#f03',
+		    fillOpacity: 0.5,
+		    radius: 1
+		}).addTo(mapa);
 	},
 
 	errorAlSolicitarLocalizacion: function(){
